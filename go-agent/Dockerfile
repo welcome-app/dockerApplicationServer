@@ -9,14 +9,13 @@ MAINTAINER Mikael Sennerholm <mikael@sennerholm.net>
 
 # Download and install Go-agent 15.1.0, curl/git and docker, totum 
 # http://download.go.cd/gocd-deb/go-agent-15.1.0-1863.deb
-RUN apt-get update &&  \
-    apt-get install -y python-pip && \
-  	pip install tutum && \
-  	wget -O /tmp/go-agent.deb http://download.go.cd/gocd-deb/go-agent-15.2.0-2248.deb && \
+RUN wget -O /tmp/go-agent.deb http://download.go.cd/gocd-deb/go-agent-15.2.0-2248.deb && \
 	dpkg -i /tmp/go-agent.deb && \
 	rm -f /tmp/go-agent.deb && \ 
   	apt-get install -y curl git && \ 
-  	curl -sSL https://get.docker.io/ubuntu/ | sh && \
+    curl -sSL https://get.docker.com/ | sh && \
+    apt-get install -y python-pip && \
+    pip install tutum && \
   	apt-get clean # Clean up
 
 
