@@ -1,10 +1,10 @@
-#repository:
-#  image: mattgruter/artifactory
-#  volumes:
-#    - data/artifactory/data:/artifactory/data
-#    - data/artifactory/logs:/artifactory/logs
-#  ports:
-#    - "18080:8080"
+repository:
+  image: mattgruter/artifactory
+  volumes:
+    - data/artifactory/data:/artifactory/data
+    - data/artifactory/logs:/artifactory/logs
+  ports:
+    - "18080:8080"
 goserver:
   image: gocd/gocd-server:15.2.0
   volumes_from:
@@ -25,5 +25,5 @@ goagent:
   volumes:
      - "/var/run/docker.sock:/var/run/docker.sock"
   links:
- #   - repository
+    - repository
     - goserver
