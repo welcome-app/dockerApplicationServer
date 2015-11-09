@@ -4,11 +4,11 @@
   <pipelines group="Doodleshop">
     <pipeline name="DoodleshopBAT" labeltemplate="1.0.${COUNT}" isLocked="false">
       <params>
-        <param name="SOURCE_DIR"></param>
+        <param name="SOURCE_DIR">api</param>
       </params>
-      <trackingtool link="https://github.com/dmarell/doodleshop/issues/${ID}" regex="##(\d+)" />
+      <trackingtool link="https://github.com/dmarell/welcome-server/issues/${ID}" regex="##(\d+)" />
       <materials>
-        <git url="https://github.com/dmarell/doodleshop" />
+        <git url="git@github.com:sennerholm/welcome-server.git" />
       </materials>
       <stage name="Build">
         <jobs>
