@@ -107,7 +107,13 @@ Editera DoodleshopBAT pipelinen och gå till "Parameters". Sätt
 ![source dir config](doc/source-config.png)
 
 ## Tutum
+
 Skapa en ssh nyckel i gocd-data/home/.ssh med 
 
   ssh-keygen -t dsa -f gocd-data/home/.ssh/id_dsa
+
+Efter ändring av ssh nyckel eller annat i gocd-data så kör:
+
+  docker-compose rm -f ; docker-compose build godata; docker-compose up
+  
 
