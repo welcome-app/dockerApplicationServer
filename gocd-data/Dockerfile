@@ -10,3 +10,4 @@ CMD tail -f /etc/go/cruise-config.xml
 VOLUME ["/etc/go/"]
 VOLUME ["/var/go/.ssh"]
 VOLUME ["/root/.ssh"]
+VOLUME ["/root/.docker"]
