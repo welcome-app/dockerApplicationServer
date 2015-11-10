@@ -108,11 +108,14 @@ Editera DoodleshopBAT pipelinen och gå till "Parameters". Sätt
 
 ## Tutum
 
-Skapa en ssh nyckel i gocd-data/home/.ssh med 
+Skapa en ssh nyckel i gocd-data/home/ssh med 
 
-  ssh-keygen -t dsa -f gocd-data/home/.ssh/id_dsa
+  ssh-keygen -t dsa -f gocd-data/home/ssh/id_dsa
 
-Skapa en gocd-data/home/.docker enligt README i den katalogen
+Skapa en gocd-data/home/docker enligt README i den katalogen
+
+Skapa en gocd-data/home/tutum enligt README i den katalogen
+
 
 Efter ändring av ssh nyckel eller annat i gocd-data så kör:
 
