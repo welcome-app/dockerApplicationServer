@@ -1,8 +1,10 @@
 FROM busybox
 
 COPY conf/cruise-config.xml /etc/go/cruise-config.xml
-COPY home/.ssh /var/go/.ssh
-COPY home/.ssh /root/.ssh
+COPY home/ssh /var/go/.ssh
+COPY home/ssh /root/.ssh
+COPY home/docker /root/.docker
+
 
 RUN chown -R 999:999 /etc/go /var/go
 
