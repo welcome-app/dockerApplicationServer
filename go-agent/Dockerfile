@@ -20,7 +20,7 @@ RUN wget -O /tmp/go-agent.deb http://download.go.cd/gocd-deb/go-agent-15.2.0-224
 
 
 # Add maven settings
-COPY maven-settings.xml /root/.m2/settings.xml
+# COPY maven-settings.xml /root/.m2/settings.xml moved to godata
 COPY autoregister.properties /var/lib/go-agent/config/autoregister.properties
 COPY go-agent /etc/default/go-agent
 
