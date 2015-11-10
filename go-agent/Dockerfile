@@ -12,9 +12,9 @@ MAINTAINER Mikael Sennerholm <mikael@sennerholm.net>
 RUN wget -O /tmp/go-agent.deb http://download.go.cd/gocd-deb/go-agent-15.2.0-2248.deb && \
 	dpkg -i /tmp/go-agent.deb && \
 	rm -f /tmp/go-agent.deb && \ 
-  	apt-get install -y curl git jq && \ 
+  	apt-get install -y curl git && \ 
     curl -sSL https://get.docker.com/ | sh && \
-    apt-get install -y python-pip && \
+    apt-get install -y python-pip jq && \
     pip install tutum && \
   	apt-get clean # Clean up
 
