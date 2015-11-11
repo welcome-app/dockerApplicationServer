@@ -17,8 +17,6 @@
 #     It is assumed that you normally have one node in the cluster and expand to 2 during deployment.
 
 set -eu
-cd $(dirname $0)
-
 #cluster_normal_size=${CLUSTER_SIZE:-1}
 #cluster_expanded_size=$(( cluster_normal_size * 2 ))
 project=welcome-api

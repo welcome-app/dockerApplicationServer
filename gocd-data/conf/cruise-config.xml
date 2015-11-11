@@ -145,9 +145,13 @@
               <fetchartifact pipeline="WelcomeApiBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
                 <runif status="passed" />
               </fetchartifact>
-              <exec command="bash" workingdir="downstream/scripts">
-                <arg>deployandsmoke.sh</arg>
-                <arg>4</arg>
+              <exec command="bash" workingdir="downstream/">
+                <arg>/opt/pipelineinabox/scripts/deploy_man.sh</arg>
+                <arg>tests/man/filter/tutum.man.yml</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="echo">
+                <arg>Run tests. Healtcheck?</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
