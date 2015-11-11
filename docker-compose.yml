@@ -17,13 +17,14 @@ godata:
   build: gocd-data
 goagent:
 # Build Localy
-  build: go-agent
+  build: go-agent  
   volumes_from:
     - godata
 # Use prebuilt
 #  image: sennerholm/gocd-agent
   volumes:
      - "/var/run/docker.sock:/var/run/docker.sock"
+     - ./data/scripts:/opt/pipelineinabox/scripts
   links:
     - repository
     - goserver

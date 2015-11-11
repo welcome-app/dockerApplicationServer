@@ -71,6 +71,22 @@
           </job>
         </jobs>
       </stage>
+      <stage name="Done">
+        <jobs>
+          <job name="Publish">
+            <tasks>
+              <fetchartifact pipeline="WelcomeApiBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="bash" workingdir="downstream">
+                <arg>/opt/pipelineinabox/scripts/publish_docker.sh</arg>
+                <arg>welcome-api</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
     </pipeline>
     <pipeline name="WelcomeApiAutoLarge" labeltemplate="${WelcomeApiBAT}-al${COUNT}" isLocked="false">
       <materials>
@@ -194,3 +210,4 @@
   <agents>
   </agents>
 </cruise>
+
