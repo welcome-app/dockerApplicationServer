@@ -1,12 +1,12 @@
 repository:
   image: mattgruter/artifactory
-  volumes:
-    - data/artifactory/data:/artifactory/data
-    - data/artifactory/logs:/artifactory/logs
+#  volumes:
+#    - data/artifactory/data:/artifactory/data
+#    - data/artifactory/logs:/artifactory/logs
   ports:
     - "18080:8080"
 goserver:
-  image: gocd/gocd-server:15.1.0
+  image: gocd/gocd-server:15.2.0
   volumes_from:
     - godata
   ports:
@@ -17,19 +17,14 @@ godata:
   build: gocd-data
 goagent:
 # Build Localy
-  build: go-agent
+  build: go-agent  
+  volumes_from:
+    - godata
 # Use prebuilt
 #  image: sennerholm/gocd-agent
   volumes:
      - "/var/run/docker.sock:/var/run/docker.sock"
+     - ./data/scripts:/opt/pipelineinabox/scripts
   links:
     - repository
     - goserver
-elk:
-  image: willdurand/elk
-  volumes:
-    - elk/config:/etc/logstash
-  ports:
-    - "8080:80"
-    - "42000:42000"
-    

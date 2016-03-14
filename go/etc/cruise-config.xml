@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="72">
   <server artifactsdir="artifacts" agentAutoRegisterKey="388b633a88de126531afa41eff9aa69e" commandRepositoryLocation="default" serverId="3c98e67f-7050-46ef-b051-fd8e63aef897" />
-  <pipelines group="Doodleshop">
-    <pipeline name="DoodleshopBAT" labeltemplate="1.0.${COUNT}" isLocked="false">
+  <pipelines group="WelcomeApi">
+    <pipeline name="WelcomeApiBAT" labeltemplate="1.0.${COUNT}" isLocked="false">
       <params>
         <param name="SOURCE_DIR"></param>
       </params>
-      <trackingtool link="https://github.com/dmarell/doodleshop/issues/${ID}" regex="##(\d+)" />
+      <trackingtool link="https://github.com/dmarell/WelcomeApi/issues/${ID}" regex="##(\d+)" />
       <materials>
-        <git url="https://github.com/dmarell/doodleshop" />
+        <git url="https://github.com/dmarell/WelcomeApi" />
       </materials>
       <stage name="Build">
         <jobs>
@@ -28,7 +28,7 @@
               </exec>
               <exec command="/bin/bash" workingdir="#{SOURCE_DIR}">
                 <arg>-c</arg>
-                <arg>sudo docker build --tag=doodleshop:$GO_PIPELINE_LABEL .</arg>
+                <arg>sudo docker build --tag=WelcomeApi:$GO_PIPELINE_LABEL .</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -49,7 +49,7 @@
         <jobs>
           <job name="DeployAndTests">
             <tasks>
-              <fetchartifact pipeline="DoodleshopBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
+              <fetchartifact pipeline="WelcomeApiBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="bash" workingdir="downstream/scripts">
@@ -67,9 +67,9 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopAutoLarge">
+    <pipeline name="WelcomeApiAutoLarge">
       <materials>
-        <pipeline pipelineName="DoodleshopBAT" stageName="AutoSmallDeployAndTest" />
+        <pipeline pipelineName="WelcomeApiBAT" stageName="AutoSmallDeployAndTest" />
       </materials>
       <stage name="AutoLargeDeployAndTest" fetchMaterials="false">
         <environmentvariables>
@@ -80,7 +80,7 @@
         <jobs>
           <job name="DeployAndTests">
             <tasks>
-              <fetchartifact pipeline="DoodleshopBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
+              <fetchartifact pipeline="WelcomeApiBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="bash" workingdir="downstream/scripts">
@@ -98,9 +98,9 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopMan" isLocked="false">
+    <pipeline name="WelcomeApiMan" isLocked="false">
       <materials>
-        <pipeline pipelineName="DoodleshopBAT" stageName="AutoSmallDeployAndTest" />
+        <pipeline pipelineName="WelcomeApiBAT" stageName="AutoSmallDeployAndTest" />
       </materials>
       <stage name="NotifyTesters">
         <jobs>
@@ -121,7 +121,7 @@
         <jobs>
           <job name="DeployAndSmokeTests">
             <tasks>
-              <fetchartifact pipeline="DoodleshopBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
+              <fetchartifact pipeline="WelcomeApiBAT" stage="Build" job="Build2DockerImage" srcdir="downstream">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="bash" workingdir="downstream/scripts">
@@ -146,10 +146,10 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopProd">
+    <pipeline name="WelcomeApiProd">
       <materials>
-        <pipeline pipelineName="DoodleshopMan" stageName="ManDeploy" materialName="DoodleshopMan" />
-        <pipeline pipelineName="DoodleshopAutoLarge" stageName="AutoLargeDeployAndTest" materialName="DoodleshopAutoLarge" />
+        <pipeline pipelineName="WelcomeApiMan" stageName="ManDeploy" materialName="WelcomeApiMan" />
+        <pipeline pipelineName="WelcomeApiAutoLarge" stageName="AutoLargeDeployAndTest" materialName="WelcomeApiAutoLarge" />
       </materials>
       <stage name="CreateReportsForDecision">
         <jobs>
@@ -172,7 +172,7 @@
         <jobs>
           <job name="DeployAndSmokeTests">
             <tasks>
-              <fetchartifact pipeline="DoodleshopBAT/DoodleshopMan" stage="Build" job="Build2DockerImage" srcdir="downstream">
+              <fetchartifact pipeline="WelcomeApiBAT/WelcomeApiMan" stage="Build" job="Build2DockerImage" srcdir="downstream">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="bash" workingdir="downstream/scripts">
